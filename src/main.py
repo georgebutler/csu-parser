@@ -148,7 +148,7 @@ for filename in os.listdir(os.getcwd() + ".\input"):
 # Output
 for academic_year in academic_years:
     fname = str(academic_year.first_half_year + "_" + academic_year.second_half_year)
-    output = open(os.getcwd() + ".\output\%s.txt" % fname, "w")
+    output = open(os.getcwd() + ".\output\%s.csv" % fname, "w")
 
     for course in academic_year.courses["Fall"]:
         for section in course.sections:
