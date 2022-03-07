@@ -158,7 +158,7 @@ for academic_year in academic_years:
             output.write("F" + academic_year.first_half_year + ", ")
             output.write(section.weekdays + ", ")
             #TODO: Check if this is the correct way to do this.
-            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
@@ -171,7 +171,7 @@ for academic_year in academic_years:
             output.write("S" + academic_year.second_half_year + ", ")
             output.write(section.weekdays + ", ")
             #TODO: Check if this is the correct way to do this.
-            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
@@ -184,7 +184,7 @@ for academic_year in academic_years:
             output.write("SUM" + academic_year.second_half_year + ", ")
             output.write(section.weekdays + ", ")
             #TODO: Check if this is the correct way to do this.
-            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
