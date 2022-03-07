@@ -33,12 +33,13 @@ class AcademicYear:
     }
 
 class Section:
-    def __init__(self, course, instructor, number, facility, weekdays):
+    def __init__(self, course, instructor, number, facility, weekdays, enrolled_total):
         self.course = course
         self.instructor = instructor
         self.number = number.strip()
         self.facility = facility.strip()
         self.weekdays = weekdays.strip()
+        self.enrolled_total = enrolled_total
 
     def __eq__(self, other):
         if isinstance(other, Section):
@@ -52,7 +53,6 @@ class Course:
         self.subject = subject.strip()
         self.catalog = catalog.strip()
         self.desc = desc.strip()
-        self.weekdays = []
         self.sections = []
 
     def __eq__(self, other):
@@ -134,7 +134,7 @@ for filename in os.listdir(os.getcwd() + ".\input"):
 
         instructor_instance = Instructor(CELLDATA_Instructor_LAST, CELLDATA_Instructor_FIRST)
         course_instance = Course(CELLDATA_Course_ID, CELLDATA_Course_SUBJECT, CELLDATA_Course_CATALOG, CELLDATA_Course_DESC)
-        section_instance = Section(course_instance, instructor_instance, CELLDATA_Section_NUMBER, CELLDATA_Section_FACILITY, CELLDATA_Section_WEEKDAYS)
+        section_instance = Section(course_instance, instructor_instance, CELLDATA_Section_NUMBER, CELLDATA_Section_FACILITY, CELLDATA_Section_WEEKDAYS, CELLDATA_Section_ENROLLED_TOTAL)
 
         if course_instance in current_academic_year.courses[current_season]:
             index = current_academic_year.courses[current_season].index(course_instance)
@@ -156,6 +156,11 @@ for academic_year in academic_years:
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("F" + academic_year.first_half_year + ", ")
+            output.write(section.weekdays + ", ")
+            #TODO: Check if this is the correct way to do this.
+            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_last)
             output.write("\n")
 
     for course in academic_year.courses["Spring"]:
@@ -164,6 +169,11 @@ for academic_year in academic_years:
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("S" + academic_year.second_half_year + ", ")
+            output.write(section.weekdays + ", ")
+            #TODO: Check if this is the correct way to do this.
+            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_last)
             output.write("\n")
 
     for course in academic_year.courses["Summer"]:
@@ -172,6 +182,11 @@ for academic_year in academic_years:
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("SUM" + academic_year.second_half_year + ", ")
+            output.write(section.weekdays + ", ")
+            #TODO: Check if this is the correct way to do this.
+            output.write(section.facility if not section.facility == "" else "Online" + ", ")
+            output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_last)
             output.write("\n")
 
     output.close()
