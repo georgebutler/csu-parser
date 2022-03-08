@@ -43,7 +43,7 @@ class Section:
 
     def __eq__(self, other):
         if isinstance(other, Section):
-            return self.number == other.number
+            return self.number == other.number and self.course.id == other.course.id
         else:
             return False
 
@@ -138,9 +138,15 @@ for filename in os.listdir(os.getcwd() + ".\input"):
 
         if course_instance in current_academic_year.courses[current_season]:
             index = current_academic_year.courses[current_season].index(course_instance)
-            found = current_academic_year.courses[current_season][index]
+            found_course = current_academic_year.courses[current_season][index]
 
-            found.sections.append(section_instance)
+            if (section_instance in found_course.sections):
+                index = found_course.sections.index(section_instance)
+                found_section = found_course.sections[index]
+
+                found_section.enrolled_total = found_section.enrolled_total + section_instance.enrolled_total
+            else:
+                found_course.sections.append(section_instance)
         else:
             course_instance.sections.append(section_instance)
             current_academic_year.courses[current_season].append(course_instance)
