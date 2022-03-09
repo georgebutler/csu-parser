@@ -1,5 +1,6 @@
 import os
 import xlrd
+import csv
 
 # Constants
 SEASON_FALL = '7'
@@ -154,48 +155,50 @@ for filename in os.listdir(os.getcwd() + ".\input"):
 # Output
 for academic_year in academic_years:
     fname = str(academic_year.first_half_year + "_" + academic_year.second_half_year)
-    output = open(os.getcwd() + ".\output\%s.csv" % fname, "w")
 
-    for course in academic_year.courses["Fall"]:
-        for section in course.sections:
-            output.write(course.subject + course.catalog + ", ")
-            output.write(course.desc.replace(',', '') + ", ")
-            output.write(section.number + ", ")
-            output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
-            output.write("F" + academic_year.first_half_year + ", ")
-            output.write(section.weekdays + ", ")
-            output.write(section.facility + ", ")
-            output.write(str(round(section.enrolled_total)) + ", ")
-            output.write(section.instructor.name_first + ", ")
-            output.write(section.instructor.name_last)
-            output.write("\n")
+    with open(os.getcwd() + ".\output\%s.csv" % fname, "w", newline='') as csvfile:
+        output = csv.writer(csvfile)
 
-    for course in academic_year.courses["Spring"]:
-        for section in course.sections:
-            output.write(course.subject + course.catalog + ", ")
-            output.write(course.desc.replace(',', '') + ", ")
-            output.write(section.number + ", ")
-            output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
-            output.write("S" + academic_year.second_half_year + ", ")
-            output.write(section.weekdays + ", ")
-            output.write(section.facility + ", ")
-            output.write(str(round(section.enrolled_total)) + ", ")
-            output.write(section.instructor.name_first + ", ")
-            output.write(section.instructor.name_last)
-            output.write("\n")
+        for course in academic_year.courses["Fall"]:
+            for section in course.sections:
+                output.writerow([
+                    course.subject + course.catalog,
+                    course.desc,
+                    section.number,
+                    academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4],
+                    "F" + academic_year.first_half_year,
+                    section.weekdays,
+                    section.facility,
+                    round(section.enrolled_total),
+                    section.instructor.name_first,
+                    section.instructor.name_last
+                ])
+        for course in academic_year.courses["Spring"]:
+            for section in course.sections:
+                output.writerow([
+                    course.subject + course.catalog,
+                    course.desc,
+                    section.number,
+                    academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4],
+                    "S" + academic_year.first_half_year,
+                    section.weekdays,
+                    section.facility,
+                    round(section.enrolled_total),
+                    section.instructor.name_first,
+                    section.instructor.name_last
+                ])
 
-    for course in academic_year.courses["Summer"]:
-        for section in course.sections:
-            output.write(course.subject + course.catalog + ", ")
-            output.write(course.desc.replace(',', '') + ", ")
-            output.write(section.number + ", ")
-            output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
-            output.write("SUM" + academic_year.second_half_year + ", ")
-            output.write(section.weekdays + ", ")
-            output.write(section.facility + ", ")
-            output.write(str(round(section.enrolled_total)) + ", ")
-            output.write(section.instructor.name_first + ", ")
-            output.write(section.instructor.name_last)
-            output.write("\n")
-
-    output.close()
+        for course in academic_year.courses["Summer"]:
+            for section in course.sections:
+                output.writerow([
+                    course.subject + course.catalog,
+                    course.desc,
+                    section.number,
+                    academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4],
+                    "SUM" + academic_year.first_half_year,
+                    section.weekdays,
+                    section.facility,
+                    round(section.enrolled_total),
+                    section.instructor.name_first,
+                    section.instructor.name_last
+                ])
