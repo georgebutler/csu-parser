@@ -144,7 +144,7 @@ for filename in os.listdir(os.getcwd() + ".\input"):
                 index = found_course.sections.index(section_instance)
                 found_section = found_course.sections[index]
 
-                found_section.enrolled_total = found_section.enrolled_total + section_instance.enrolled_total
+                found_section.enrolled_total = found_section.enrolled_total
             else:
                 found_course.sections.append(section_instance)
         else:
@@ -163,9 +163,9 @@ for academic_year in academic_years:
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("F" + academic_year.first_half_year + ", ")
             output.write(section.weekdays + ", ")
-            #TODO: Check if this is the correct way to do this.
-            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_first + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
 
@@ -176,9 +176,9 @@ for academic_year in academic_years:
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("S" + academic_year.second_half_year + ", ")
             output.write(section.weekdays + ", ")
-            #TODO: Check if this is the correct way to do this.
-            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_first + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
 
@@ -189,9 +189,9 @@ for academic_year in academic_years:
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("SUM" + academic_year.second_half_year + ", ")
             output.write(section.weekdays + ", ")
-            #TODO: Check if this is the correct way to do this.
-            output.write(section.facility + ", " if not section.facility == "" else "Online" + ", ")
+            output.write(section.facility + ", ")
             output.write(str(round(section.enrolled_total)) + ", ")
+            output.write(section.instructor.name_first + ", ")
             output.write(section.instructor.name_last)
             output.write("\n")
 
