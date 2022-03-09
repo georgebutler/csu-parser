@@ -159,6 +159,7 @@ for academic_year in academic_years:
     for course in academic_year.courses["Fall"]:
         for section in course.sections:
             output.write(course.subject + course.catalog + ", ")
+            output.write(course.desc + ", ")
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("F" + academic_year.first_half_year + ", ")
@@ -172,6 +173,7 @@ for academic_year in academic_years:
     for course in academic_year.courses["Spring"]:
         for section in course.sections:
             output.write(course.subject + course.catalog + ", ")
+            output.write(course.desc + ", ")
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("S" + academic_year.second_half_year + ", ")
@@ -185,6 +187,7 @@ for academic_year in academic_years:
     for course in academic_year.courses["Summer"]:
         for section in course.sections:
             output.write(course.subject + course.catalog + ", ")
+            output.write(course.desc + ", ")
             output.write(section.number + ", ")
             output.write(academic_year.first_half_year[2:4] + "-" + academic_year.second_half_year[2:4] + ", ")
             output.write("SUM" + academic_year.second_half_year + ", ")
