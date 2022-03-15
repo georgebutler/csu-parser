@@ -77,7 +77,8 @@ class Instructor:
 academic_years = [
     AcademicYear(2018, 2019),
     AcademicYear(2019, 2020),
-    AcademicYear(2020, 2021)
+    AcademicYear(2020, 2021),
+    AcademicYear(2021, 2022),
 ]
 
 # Per File
